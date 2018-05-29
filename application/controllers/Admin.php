@@ -8,6 +8,11 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/login_header');
 		$this->load->view('login/login');
 	}
+	public function dashboard()
+	{
+		$this->load->view('templates/dashboard_header');
+		$this->load->view('admin/admin');
+	}
 	public function loginuser()
 	{
 		$data['userinfo'] = $this->user_model->loguser();
@@ -28,6 +33,7 @@ class Admin extends CI_Controller {
 			// 	$this->session->set_flashdata('error','Account is Inactive');
 			// 	redirect('login');
 			// }
+			redirect('dashboard');
 			var_dump($data['userinfo']);
 		}
 		else{
