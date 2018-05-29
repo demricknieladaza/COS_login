@@ -14,6 +14,13 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/admin');
 		$this->load->view('templates/dashboard_footer');
 	}
+	public function staff()
+	{
+		$user_data = $this->session->userdata();
+		$this->load->view('templates/staff_header');
+		$this->load->view('staff/staff',$user_data);
+		$this->load->view('templates/staff_footer');
+	}
 	public function adduser()
 	{
 		$this->user_model->reguser();
@@ -27,11 +34,13 @@ class Admin extends CI_Controller {
 			if($data['userinfo'][0]['user_status']=='active'){
 				if($data['userinfo'][0]['utype']==1){
 					$userdata = $data['userinfo'][0];
-					$this->session->set_userdata($userdata);
+					$this->session->set_userdata('userdata', $userdata);
 					redirect('dashboard');
 				}
 				elseif($data['userinfo'][0]['utype']==2){
-					echo ('hello user');
+					$userdata = $data['userinfo'][0];
+					$this->session->set_userdata('userdata', $userdata);
+					redirect('staff');
 				}
 			}
 			else{
