@@ -6,7 +6,8 @@ class User_model extends CI_Model{
 		parent::__construct();
 	}
 	
-	public function loguser(){
+	public function loguser()
+	{
 		$username = $this->input->post('luname');
 		$password = md5($this->input->post('lpassword'));
 
@@ -21,6 +22,18 @@ class User_model extends CI_Model{
 		}else{
 			return false;
 		}
+	}
+
+	public function reguser()
+	{
+		$data = array(
+			'fname'=>$this->input->post('fname'),
+			'lname'=>$this->input->post('lname'),
+			'uname'=>$this->input->post('fname'),
+			'password'=> md5('password'),
+			'utype'=> 2
+		);
+		return $this->db->insert('user_tbl',$data);
 	}
 
 }

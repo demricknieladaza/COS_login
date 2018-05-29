@@ -12,28 +12,32 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('templates/dashboard_header');
 		$this->load->view('admin/admin');
+		$this->load->view('templates/dashboard_footer');
+	}
+	public function adduser()
+	{
+		$this->user_model->reguser();
+		$this->session->set_flashdata('success','Successfully register');
+		redirect('dashboard');
 	}
 	public function loginuser()
 	{
 		$data['userinfo'] = $this->user_model->loguser();
 		if($data['userinfo']==True){
-			// if($data['userinfo'][0]['user_status']=='active'){
-			// 	if($data['userinfo'][0]['user_type']==1){
-			// 		$userdata = $data['userinfo'][0];
-			// 		$this->session->set_userdata($userdata);
-			// 		$this->load->view('templates/admin_header');
-			// 		$this->load->view('admin/admin');
-			// 		$this->load->view('templates/admin_footer');
-			// 	}
-			// 	elseif($data['userinfo'][0]['user_type']==2){
-			// 		echo ('hello user');
-			// 	}
-			// }
-			// else{
-			// 	$this->session->set_flashdata('error','Account is Inactive');
-			// 	redirect('login');
-			// }
-			redirect('dashboard');
+			if($data['userinfo'][0]['user_status']=='active'){
+				if($data['userinfo'][0]['utype']==1){
+					$userdata = $data['userinfo'][0];
+					$this->session->set_userdata($userdata);
+					redirect('dashboard');
+				}
+				elseif($data['userinfo'][0]['utype']==2){
+					echo ('hello user');
+				}
+			}
+			else{
+				$this->session->set_flashdata('error','Account is Inactive');
+				redirect('admin');
+			}
 			var_dump($data['userinfo']);
 		}
 		else{
