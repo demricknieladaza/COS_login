@@ -7,6 +7,7 @@ class Staff extends CI_Controller {
 	{
 		$user_data['user'] = $this->session->userdata('userdata');
 		$user_data['time_id'] = $this->session->userdata('timein_id');
+		$user_data['timesheets'] = $this->user_model->getTimesheet();
 		$this->load->view('templates/staff_header');
 		$this->load->view('staff/time',$user_data);
 	}

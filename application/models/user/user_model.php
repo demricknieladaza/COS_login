@@ -62,6 +62,15 @@ class User_model extends CI_Model{
 		return $this->db->update('timesheets_tbl');
 	}
 
+	public function getTimesheet()
+	{	
+
+		$this->db->where('user_id',$this->session->userdata('userdata')['id']);
+		$this->db->order_by('date', 'desc');
+		$result = $this->db->get('timesheets_tbl');
+		return $result->result();
+	}
+
 }
 
  ?>

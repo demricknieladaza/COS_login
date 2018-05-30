@@ -8,12 +8,14 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/login_header');
 		$this->load->view('login/login');
 	}
+
 	public function dashboard()
 	{
 		$this->load->view('templates/dashboard_header');
 		$this->load->view('admin/admin');
 		$this->load->view('templates/dashboard_footer');
 	}
+
 	public function staff()
 	{
 		$user_data = $this->session->userdata();
@@ -21,12 +23,21 @@ class Admin extends CI_Controller {
 		$this->load->view('staff/staff',$user_data);
 		$this->load->view('templates/staff_footer');
 	}
+
+	public function manage_staff()
+	{
+		$this->load->view('templates/dashboard_header');
+		$this->load->view('admin/manage_staff');
+		//$this->load->view('templates/dashboard_footer');
+	}
+
 	public function adduser()
 	{
 		$this->user_model->reguser();
 		$this->session->set_flashdata('success','Successfully register');
 		redirect('dashboard');
 	}
+
 	public function loginuser()
 	{
 		$data['userinfo'] = $this->user_model->loguser();
@@ -54,4 +65,34 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('admin');
+	}
+
+	public function fetch_user()
+	{  
+    	$this->load->model("user/Staff_model","staff_model");
+    	$fetch_data = $this->staff_model->make_datatables();
+    	$data = array();
+    	foreach ($fetch_data as $row) 
+    	{
+    		$sub_array = array();
+    		$sub_array[] = $row->id;
+    		$sub_array[] = $row->fname;
+    		$sub_array[] = $row->lname;
+    		$sub_array[] = '<button type="button" name="assign" id="'.$row->id.'" class="btn btn-warning btn-xs">Assign Task</button>';
+    		$data[] = $sub_array;
+    	}
+
+    	$output = array(
+    		"draw" => intval($_POST["draw"]),
+    		"recordsTotal" => $this->staff_model->get_all_data(),
+    		"recordsfiltered" => $this->staff_model->get_filtered_data(),
+    		"data"	=> $data
+    	);
+    	echo json_encode($output);	
+    }
 }
