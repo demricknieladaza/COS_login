@@ -42,6 +42,12 @@
            $this->db->from($this->table);  
            return $this->db->count_all_results();  
       }
+      function get_user($user_id)  
+      {  
+       $this->db->where("id", $user_id);  
+       $query=$this->db->get('user_tbl');  
+       return $query->result();  
+      } 
 
 
  }  

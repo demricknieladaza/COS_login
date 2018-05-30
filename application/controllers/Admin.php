@@ -28,7 +28,7 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('templates/dashboard_header');
 		$this->load->view('admin/manage_staff');
-		//$this->load->view('templates/dashboard_footer');
+		$this->load->view('templates/dashboard_footer');
 	}
 
 	public function adduser()
@@ -72,6 +72,20 @@ class Admin extends CI_Controller {
 		redirect('admin');
 	}
 
+	public function getuser()  
+	{  
+	 $output = array();  
+	 $this->load->model("user/Staff_model","staff_model");  
+	 $data = $this->staff_model->get_user($_POST["user_id"]);  
+	 foreach($data as $row)  
+	 {  
+	      $output['fname'] = $row->fname;  
+	      $output['id'] = $row->id;
+	      $output['lname'] = $row->lname;
+	 }  
+	 echo json_encode($output);  
+	}
+
 	public function fetch_user()
 	{  
     	$this->load->model("user/Staff_model","staff_model");
@@ -83,7 +97,7 @@ class Admin extends CI_Controller {
     		$sub_array[] = $row->id;
     		$sub_array[] = $row->fname;
     		$sub_array[] = $row->lname;
-    		$sub_array[] = '<button type="button" name="assign" id="'.$row->id.'" class="btn btn-warning btn-xs">Assign Task</button>';
+    		$sub_array[] = '<button type="button" id="'.$row->id.'" class="btn btn-warning btn-xs assign">Assign Task</button>';
     		$data[] = $sub_array;
     	}
 

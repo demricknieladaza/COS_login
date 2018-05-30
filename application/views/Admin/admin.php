@@ -22,7 +22,7 @@
               </a>
             </div>
             <div class="col-md-3">
-              <a href="admin/manage_staff">
+              <a href="<?php echo base_url(); ?>admin/manage_staff">
               <div class="metric">
                 <span class="icon"><i class="fa fa-users"></i></span>
                 <p>
