@@ -19,21 +19,34 @@ function checkTime(i) {
     return i;
 }
 </script>
-<?php var_dump($user); ?>
+
 <div class="main">
   <div class="main-content">
     <div class="container-fluid">
       <div class="panel panel-headline">
+        <?php echo ($time_id); ?>
         <div style="padding: 0 10px;margin: 10px 10px">
+          <?php if($user['is_timein']=='no'): ?>
           <?php echo form_open('staff/timein'); ?>
+          <div id="txt"></div>
+          <div class="form-group">
+            Note:
+            <input type="text" class="form-control" style="width: 40%;"></input>
+            <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>"></input>
+          </div>
+          <button type="submit" class="btn btn-success">Log In</button>
+          <?php elseif($user['is_timein']=='yes'): ?>
+          <?php echo form_open('staff/timeout'); ?>
           Time:
           <div id="txt"></div>
           <div class="form-group">
             Note:
             <input type="text" class="form-control" style="width: 40%;"></input>
-            <input type="text" class="form-control" value="<?php $user['fname']?>"></input>
+            <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>"></input>
+             <input type="hidden" class="form-control" name="tid" value="<?php echo $time_id ?>"></input>
           </div>
-          <button type="submit" class="btn btn-success">Punch In</button>
+          <button type="submit" class="btn btn-success">Log Out</button>
+          <?php endif; ?>
           <?php echo form_close(); ?>
         </div>
       </div>
