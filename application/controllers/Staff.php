@@ -31,4 +31,12 @@ class Staff extends CI_Controller {
 		$this->session->set_flashdata('success','Successful!');
 		redirect('staff');
 	}
+
+	public function mytask()
+	{
+		$data['tasks'] = $this->user_model->getmytask();
+		$this->load->view('templates/staff_header');
+		$this->load->view('staff/staff_task',$data);
+		$this->load->view('templates/staff_footer');
+	}
 }

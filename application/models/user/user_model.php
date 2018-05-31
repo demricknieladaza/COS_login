@@ -81,6 +81,14 @@ class User_model extends CI_Model{
 		$this->db->insert('task_tbl',$data);
 	}
 
+	public function getmytask()
+	{
+		$this->db->where('user_id',$this->session->userdata('userdata')['id']);
+		$this->db->order_by('date_created', 'desc');
+		$result = $this->db->get('task_tbl');
+		return $result->result();
+	}
+
 }
 
  ?>

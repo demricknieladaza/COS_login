@@ -69,8 +69,8 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>My Tasks</span></a></li>
+						<li><a href="#" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="<?php echo base_url(); ?>staff/mytask" class=""><i class="lnr lnr-code"></i> <span>My Tasks</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/time" class=""><i class="lnr lnr-chart-bars"></i> <span>Time In/Out</span></a></li>
 						<li><a href="<?php echo base_url(); ?> staff/time" class=""><i class="lnr lnr-cog"></i> <span>Messaging</span></a></li>
 						<li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Apply Leave</span></a></li>
