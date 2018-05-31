@@ -116,11 +116,52 @@ class Admin extends CI_Controller {
     	echo json_encode($output);	
     }
 
+    public function fetch_task()
+    {  
+    	$this->load->model("user/Staff_task_model","staff_task_model");
+    	$fetch_data = $this->staff_task_model->make_datatables();
+    	$data = array();
+    	foreach ($fetch_data as $row) 
+    	{
+    		$name = $this->staff_task_model->get_user($row->user_id);
+    		$sub_array = array();
+    		$sub_array[] = $row->id;
+    		$sub_array[] = $name[0]['fname']." ".$name[0]['lname'];
+    		$sub_array[] = $row->task;
+    		$sub_array[] = date("M-d-Y", strtotime($row->date_created));
+    		$sub_array[] = '<button type="button" id="'.$row->id.'" class="btn btn-warning btn-xs done">Mark as Done</button>';
+    		
+    		$data[] = $sub_array;
+    	}
+
+    	$output = array(
+    		"draw" => intval($_POST["draw"]),
+    		"recordsTotal" => $this->staff_task_model->get_all_data(),
+    		"recordsfiltered" => $this->staff_task_model->get_filtered_data(),
+    		"data"	=> $data
+    	);
+    	echo json_encode($output);	
+    }
+
     public function assign()
     {
     	$this->user_model->assigntask();
-    	$this->session->set_flashdata('success','Success!');
+    	$this->session->set_flashdata('success','Task Successfully assigned!');
 		redirect('admin/manage_staff');
 
+    }
+
+    public function manage_task()
+    {
+    	$this->load->model('user/Staff_task_model','staff_task_model');
+    	$data['task'] = $this->staff_task_model->get_user(3);
+    	$this->load->view('templates/dashboard_header');
+    	$this->load->view('admin/staff_task',$data);
+    	$this->load->view('templates/dashboard_footer');
+    }
+    public function markdone()
+    {  
+        $this->user_model->markdone($_POST["user_id"]);
+        $this->session->set_flashdata('success','Task Marked as Done!');
     }
 }

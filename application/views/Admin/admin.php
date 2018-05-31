@@ -33,13 +33,15 @@
               </a>
             </div>
             <div class="col-md-3">
+              <a href="<?php echo base_url(); ?>admin/manage_task">
               <div class="metric">
-                <span class="icon"><i class="fa fa-eye"></i></span>
+                <span class="icon"><i class="fa fa-tasks"></i></span>
                 <p>
-                <span class="number">274,678</span>
-                <span class="title">Visits</span>
+                  <span class="number">Manage</span>
+                  <span class="title" >Staff Task</span>
                 </p>
               </div>
+              </a>
             </div>
             <div class="col-md-3">
               <div class="metric">
@@ -81,55 +83,3 @@
     </div>
   </div>
 </div>
-<script>
-  function readURLs(input) {
-      if (input.files && input.files[0]) {
-          var reader = new FileReader();
-
-          reader.onload = function (e) {
-              $('#bladsh').attr('src', e.target.result);
-          }
-
-          reader.readAsDataURL(input.files[0]);
-      }
-  }
-</script>
-<script>
-  $(document).ready(function(){
-      var max_fields      = 10;
-      var wrapper         = $(".input_fields_wrap");
-      var add_button      = $(".add_field_button"); 
-      
-      var x = 1; //initlal text box count
-      $(add_button).click(function(e){ //on add input button click
-          e.preventDefault();
-          if(x < max_fields){ //max input box allowed
-              x++; //text box increment
-              $(wrapper).append('<div><input type="text" name="req[]" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
-          }
-      });
-      
-      $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-          e.preventDefault(); $(this).parent('div').remove(); x--;
-      })
-  });
-</script>
-<script>
-function readURL(input) {
-
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      $('#blah').attr('src', e.target.result);
-    }
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-$("#imgInp").change(function() {
-  readURL(this);
-});
-
-</script>

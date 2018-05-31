@@ -89,6 +89,13 @@ class User_model extends CI_Model{
 		return $result->result();
 	}
 
+	public function markdone($uid)
+	{
+		$this->db->set('status','done');
+		$this->db->where('id',$uid);
+		$this->db->update('task_tbl');
+	}
+
 }
 
  ?>

@@ -6,10 +6,11 @@
     <div class="container-fluid">
       <div class="panel panel-headline">
         <div class="panel-heading">
-          <?php if($this->session->flashdata('success')){ ?>
-          <p class="alert alert-success" role="alert">
-            <?php echo $this->session->flashdata('success');} ?>
-          </p>
+           <?php if($this->session->flashdata('success')){ ?>
+            <div class="alert alert-success alert-dismissible fade in" id="success-alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <?php echo $this->session->flashdata('success');} ?>
+            </div>
           <h1>Staff Manager</h1>
         </div>
         <div class="panel-body">
@@ -34,31 +35,31 @@
 <div id="userModal2" class="modal fade">  
       <div class="modal-dialog">  
           <?php echo form_open('admin/assign'); ?>
-                <div class="modal-content">  
-                     <div class="modal-header">  
-                          <button type="button" class="close" data-dismiss="modal">&times;</button> 
-                          <h4 class="umodal-title"> </h4>  
-                     </div>  
-                     <div class="modal-body"> 
-                        <div class="form-group">
-                          <label><b>Name: </b><p id="ufname" name="ufname"></p>  </label>
-                          <!-- <input type="text" name="ufname" id="ufname" class="form-control" placeholder="First Name" required > -->
-                        </div>
-                        <div class="form-group">
-                          <input type="hidden" name="uid" id="uid" class="form-control" placeholder="id" required >
-                        </div>
-                        <div class="form-group">
-                          <label>Task</label>
-                          <textarea name="task" class="form-control" required ></textarea>
-                          <!-- <input type="text" name="ulname" id="ulname" class="form-control" placeholder="Last name" required > -->
-                        </div> 
-                     </div>  
-                     <div class="modal-footer"> 
-                        <input type="hidden" name="id" id="id" />  
-                          <input type="submit" name="action" class="btn btn-success acts" value="Assign" /> 
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                     </div>  
-                </div>  
+          <div class="modal-content">  
+           <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal">&times;</button> 
+                <h4 class="umodal-title"> </h4>  
+           </div>  
+           <div class="modal-body"> 
+              <div class="form-group">
+                <label><b>Name: </b><p id="ufname" name="ufname"></p>  </label>
+                <!-- <input type="text" name="ufname" id="ufname" class="form-control" placeholder="First Name" required > -->
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="uid" id="uid" class="form-control" placeholder="id" required >
+              </div>
+              <div class="form-group">
+                <label>Task</label>
+                <textarea name="task" class="form-control" required ></textarea>
+                <!-- <input type="text" name="ulname" id="ulname" class="form-control" placeholder="Last name" required > -->
+              </div> 
+           </div>  
+           <div class="modal-footer"> 
+              <input type="hidden" name="id" id="id" />  
+                <input type="submit" name="action" class="btn btn-success acts" value="Assign" /> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+           </div>  
+          </div>  
            <?php echo form_close(); ?>
       </div>  
  </div>
@@ -89,13 +90,17 @@ $(document).ready(function(){
             success:function(data)  
             {  
              $('#userModal2').modal('show');  
-             $('#ufname').text(data.fname +" "+ data.lname);  
-             $('#ulname').val(data.lname);   
+             $('#ufname').text(data.fname +" "+ data.lname);
              $('#uid').val(data.id);   
              $('.umodal-title').text("Assign Task");  
              $('#id').val(user_id);  
             }  
        })  
   });
+});
+</script>
+<script type="text/javascript">
+  $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").slideUp(500);
 });
 </script>

@@ -1,13 +1,11 @@
 <div class="login-page">
-	<?php if($this->session->flashdata('success')){ ?>
-	<p class="alert alert-success" role="alert">
-	  <?php echo $this->session->flashdata('success');} ?>
-	</p>
 	<?php if($this->session->flashdata('error')){ ?>
-	<p class="alert alert-danger" role="alert">
-	  <?php echo $this->session->flashdata('error');} ?>
-	</p>
+    <p class="alert alert-danger alert-dismissible fade in" id="success-alert">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <?php echo $this->session->flashdata('error');} ?>
+    </p>
   <div class="form">
+	 
     <?php $attributes = array('class'=>'login-form');?>
     <?php echo form_open('admin/loginuser',$attributes); ?>
       <input type="text" name="luname" placeholder="username"/>
@@ -118,3 +116,8 @@
 	  -moz-osx-font-smoothing: grayscale;      
 	}
 </style>
+<script type="text/javascript">
+	$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").slideUp(500);
+});
+</script>
