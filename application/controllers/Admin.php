@@ -97,7 +97,13 @@ class Admin extends CI_Controller {
     		$sub_array[] = $row->id;
     		$sub_array[] = $row->fname;
     		$sub_array[] = $row->lname;
-    		$sub_array[] = '<button type="button" id="'.$row->id.'" class="btn btn-warning btn-xs assign">Assign Task</button>';
+    		if($row->fname=='admin'){
+    			$sub_array[] = 'ADMIN';
+    		}
+    		else{
+    			$sub_array[] = '<button type="button" id="'.$row->id.'" class="btn btn-warning btn-xs assign">Assign Task</button>';
+    		}
+    		
     		$data[] = $sub_array;
     	}
 
@@ -108,5 +114,13 @@ class Admin extends CI_Controller {
     		"data"	=> $data
     	);
     	echo json_encode($output);	
+    }
+
+    public function assign()
+    {
+    	$this->user_model->assigntask();
+    	$this->session->set_flashdata('success','Success!');
+		redirect('admin/manage_staff');
+
     }
 }

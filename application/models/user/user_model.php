@@ -71,6 +71,16 @@ class User_model extends CI_Model{
 		return $result->result();
 	}
 
+	public function assigntask()
+	{
+		$data = array(
+			'user_id' => $this->input->post('uid'),
+			'task' => $this->input->post('task')
+		);
+
+		$this->db->insert('task_tbl',$data);
+	}
+
 }
 
  ?>

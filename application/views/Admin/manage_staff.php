@@ -1,8 +1,15 @@
+<style type="text/css">
+  textarea { resize: vertical; }
+</style>
 <div class="main">
   <div class="main-content">
     <div class="container-fluid">
       <div class="panel panel-headline">
         <div class="panel-heading">
+          <?php if($this->session->flashdata('success')){ ?>
+          <p class="alert alert-success" role="alert">
+            <?php echo $this->session->flashdata('success');} ?>
+          </p>
           <h1>Staff Manager</h1>
         </div>
         <div class="panel-body">
@@ -24,46 +31,25 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="Assign" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Assign Task</h4>
-        </div>
-        <div class="modal-body">
-          <?php echo form_open('admin/assign'); ?>
-          <div class="form-group">
-            <label for="usr">Task:</label>
-            <textarea name="task" class="form-control" ></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" >Assign</button>
-          <?php echo form_close(); ?>
-        </div>
-    </div>
-  </div>
-</div>
 <div id="userModal2" class="modal fade">  
       <div class="modal-dialog">  
-           <form method="post" id="user_form2">
+          <?php echo form_open('admin/assign'); ?>
                 <div class="modal-content">  
                      <div class="modal-header">  
                           <button type="button" class="close" data-dismiss="modal">&times;</button> 
-                          <h4 class="umodal-title">Add User</h4>  
+                          <h4 class="umodal-title"> </h4>  
                      </div>  
                      <div class="modal-body"> 
                         <div class="form-group">
-                          <label>First Name</label>
-                          <input type="text" name="ufname" id="ufname" class="form-control" placeholder="First Name" required >
+                          <label><b>Name: </b><p id="ufname" name="ufname"></p>  </label>
+                          <!-- <input type="text" name="ufname" id="ufname" class="form-control" placeholder="First Name" required > -->
                         </div>
                         <div class="form-group">
-                          <label>Last Name</label>
-                          <input type="text" name="ulname" id="ulname" class="form-control" placeholder="Last name" required >
+                          <input type="hidden" name="uid" id="uid" class="form-control" placeholder="id" required >
                         </div>
                         <div class="form-group">
                           <label>Task</label>
-                          <textarea class="form-control" ></textarea>
+                          <textarea name="task" class="form-control" required ></textarea>
                           <!-- <input type="text" name="ulname" id="ulname" class="form-control" placeholder="Last name" required > -->
                         </div> 
                      </div>  
@@ -73,7 +59,7 @@
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
                      </div>  
                 </div>  
-           </form>
+           <?php echo form_close(); ?>
       </div>  
  </div>
 <script type="text/javascript" language="javascript">
@@ -88,7 +74,7 @@ $(document).ready(function(){
     },
     "columnDefs":[
       {
-        "targets":[],
+        "targets":[3],
         "orderable":false,
       }
     ]
@@ -103,8 +89,9 @@ $(document).ready(function(){
             success:function(data)  
             {  
              $('#userModal2').modal('show');  
-             $('#ufname').val(data.fname);  
+             $('#ufname').text(data.fname +" "+ data.lname);  
              $('#ulname').val(data.lname);   
+             $('#uid').val(data.id);   
              $('.umodal-title').text("Assign Task");  
              $('#id').val(user_id);  
             }  
