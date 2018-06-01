@@ -44,14 +44,31 @@
               </a>
             </div>
             <div class="col-md-3">
+              <a href="<?php echo base_url(); ?>admin/manage_leave">
               <div class="metric">
-                <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                <span class="icon"><i class="fa fa-sticky-note"></i></span>
                 <p>
-                  <span class="number">35%</span>
-                  <span class="title">Conversions</span>
+                  <span class="number">Manage</span>
+                  <span class="title" >Leave form</span>
                 </p>
               </div>
+              </a>
             </div>
+          </div>
+          <div class="row">
+            <div class="panel-heading">
+              <h1>Online Staff</h1>
+            </div>
+            <table id="user_data" class="table table-bordered table-striped" width="100%">  
+             <thead>  
+              <tr>  
+               <th width="10%">Task ID</th>  
+               <th>Name</th>  
+               <th>Time In</th>  
+               <th>Time Out</th>
+              </tr>   
+             </thead>  
+            </table>
           </div>
         </div>
       </div>

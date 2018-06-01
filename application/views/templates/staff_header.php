@@ -20,6 +20,15 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url(); ?>assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url(); ?>assets/img/favicon.png">
+	<!--  jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+	<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+	<!-- Bootstrap Date-Picker Plugin -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 </head>
 
@@ -72,8 +81,8 @@
 						<li><a href="#" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/mytask" class=""><i class="lnr lnr-code"></i> <span>My Tasks</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/time" class=""><i class="lnr lnr-chart-bars"></i> <span>Time In/Out</span></a></li>
-						<li><a href="<?php echo base_url(); ?> staff/time" class=""><i class="lnr lnr-cog"></i> <span>Messaging</span></a></li>
-						<li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Apply Leave</span></a></li>
+						<li><a href="#" class=""><i class="lnr lnr-cog"></i> <span>Messaging</span></a></li>
+						<li><a href="<?php echo base_url(); ?>staff/applyleave" class=""><i class="lnr lnr-alarm"></i> <span>Apply Leave</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">

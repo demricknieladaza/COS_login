@@ -96,6 +96,32 @@ class User_model extends CI_Model{
 		$this->db->update('task_tbl');
 	}
 
+	public function markapprove($uid)
+	{
+		$this->db->set('status','approved');
+		$this->db->where('id',$uid);
+		$this->db->update('leave_tbl');
+	}
+
+	public function submitleave()
+	{
+		$data = array(
+			'user_id' => $this->session->userdata('userdata')['id'],
+			'date_from' => date('Y-m-d',strtotime($this->input->post('datefrom'))),
+			'date_to' => date('Y-m-d',strtotime($this->input->post('dateto'))),
+			'reason' => $this->input->post('reason')
+		);
+		$this->db->insert('leave_tbl',$data);
+	}
+
+	public function get_my_leave()
+	{
+		$this->db->where('user_id',$this->session->userdata('userdata')['id']);
+		$this->db->order_by('date_created','desc');
+		$query = $this->db->get('leave_tbl');
+		return $query->result();
+	}
+
 }
 
  ?>

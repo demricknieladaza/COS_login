@@ -39,4 +39,19 @@ class Staff extends CI_Controller {
 		$this->load->view('staff/staff_task',$data);
 		$this->load->view('templates/staff_footer');
 	}
+
+	public function applyleave()
+	{
+		$data['leaves'] = $this->user_model->get_my_leave();
+		$this->load->view('templates/staff_header');
+		$this->load->view('staff/staff_leaveform',$data);
+		$this->load->view('templates/staff_footer');
+	}
+
+	public function submitleave()
+	{
+		$this->user_model->submitleave();
+		$this->session->set_flashdata('success','Success');
+		redirect('staff/applyleave');
+	}
 }

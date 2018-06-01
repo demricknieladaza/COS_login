@@ -1,17 +1,17 @@
 <?php  
- class Staff_task_model extends CI_Model  
+ class Staff_leave_model extends CI_Model  
  {  
-  var $table = "task_tbl";  
+  var $table = "leave_tbl";  
   var $select_column = array("*");
-  var $order_column = array("id","date_from","date_to","reason",NULL);
+  var $order_column = array("id","fname","lname",NULL);
   function make_query()  
   {  
        $this->db->select($this->select_column);  
-       $this->db->where('status','ongoing');  
+       $this->db->where('status','pending');  
        $this->db->from($this->table);  
        if(isset($_POST["search"]["value"]))  
        {  
-            $this->db->like("task", $_POST["search"]["value"]); 
+            $this->db->like("reason", $_POST["search"]["value"]); 
             // $this->db->or_like("id", $_POST["search"]["value"]); 
        }  
        if(isset($_POST["order"]))  
@@ -40,7 +40,7 @@
   function get_all_data()  
   {  
        $this->db->select("*");
-       $this->db->where('status','ongoing'); 
+       $this->db->where('status','pending'); 
        $this->db->from($this->table);  
        return $this->db->count_all_results();  
   }

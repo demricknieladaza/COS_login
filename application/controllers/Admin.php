@@ -11,8 +11,9 @@ class Admin extends CI_Controller {
 
 	public function dashboard()
 	{
+        $data['staffs'] = $this->user_model->get_online_staff();
 		$this->load->view('templates/dashboard_header');
-		$this->load->view('admin/admin');
+		$this->load->view('admin/admin',$data);
 		$this->load->view('templates/dashboard_footer');
 	}
 
@@ -163,5 +164,46 @@ class Admin extends CI_Controller {
     {  
         $this->user_model->markdone($_POST["user_id"]);
         $this->session->set_flashdata('success','Task Marked as Done!');
+    }
+
+    public function manage_leave()
+    {
+    	$this->load->view('templates/dashboard_header');
+    	$this->load->view('admin/manage_leave');
+    	$this->load->view('templates/dashboard_footer');
+    }
+
+    public function fetch_leave()
+    {  
+    	$this->load->model("user/Staff_leave_model","staff_leave_model");
+    	$fetch_data = $this->staff_leave_model->make_datatables();
+    	$data = array();
+    	foreach ($fetch_data as $row) 
+    	{
+    		$name = $this->staff_leave_model->get_user($row->user_id);
+    		$sub_array = array();
+    		$sub_array[] = $row->id;
+    		$sub_array[] = $name[0]['fname']." ".$name[0]['lname'];
+    		$sub_array[] = date("M-d-Y", strtotime($row->date_from));
+    		$sub_array[] = date("M-d-Y", strtotime($row->date_to));
+    		$sub_array[] = $row->reason;
+    		$sub_array[] = '<button type="button" id="'.$row->id.'" class="btn btn-warning btn-xs approve">Approve</button>';
+    		
+    		$data[] = $sub_array;
+    	}
+
+    	$output = array(
+    		"draw" => intval($_POST["draw"]),
+    		"recordsTotal" => $this->staff_leave_model->get_all_data(),
+    		"recordsfiltered" => $this->staff_leave_model->get_filtered_data(),
+    		"data"	=> $data
+    	);
+    	echo json_encode($output);	
+    }
+
+    public function approveleave()
+    {  
+        $this->user_model->markapprove($_POST["user_id"]);
+        $this->session->set_flashdata('success','Approved!');
     }
 }
