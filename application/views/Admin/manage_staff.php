@@ -7,10 +7,10 @@
       <div class="panel panel-headline">
         <div class="panel-heading">
            <?php if($this->session->flashdata('success')){ ?>
-            <div class="alert alert-success alert-dismissible fade in" id="success-alert">
+            <p class="alert alert-success alert-dismissible fade in" id="success-alert">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
               <?php echo $this->session->flashdata('success');} ?>
-            </div>
+            </p>
           <h1>Staff Manager</h1>
         </div>
         <div class="panel-body">

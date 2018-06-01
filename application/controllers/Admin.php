@@ -11,7 +11,19 @@ class Admin extends CI_Controller {
 
 	public function dashboard()
 	{
-        $data['staffs'] = $this->user_model->get_online_staff();
+        $staffs = array();
+        $staff = $this->user_model->get_online_staff();
+        foreach ($staff as $row) {
+            $time = $this->user_model->get_time($row->id);
+            $staffs_sub = array();
+            $staffs_sub['id'] =$row->id;
+            $staffs_sub['name'] =$row->fname." ".$row->fname;
+            $staffs_sub['timein'] = $time['time_in'];
+            $staffs_sub['timeout'] = $time['time_out'];
+
+            $staffs[] = $staffs_sub;
+        }
+        $data['staffs']=$staffs;    
 		$this->load->view('templates/dashboard_header');
 		$this->load->view('admin/admin',$data);
 		$this->load->view('templates/dashboard_footer');
@@ -205,5 +217,12 @@ class Admin extends CI_Controller {
     {  
         $this->user_model->markapprove($_POST["user_id"]);
         $this->session->set_flashdata('success','Approved!');
+    }
+
+    public function chat()
+    {
+        $this->load->view('templates/dashboard_header');
+        $this->load->view('admin/chat');
+        $this->load->view('templates/dashboard_footer');
     }
 }

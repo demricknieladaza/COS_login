@@ -122,6 +122,36 @@ class User_model extends CI_Model{
 		return $query->result();
 	}
 
+	public function get_online_staff()
+	{
+		$this->db->where('is_timein','yes');
+		$query = $this->db->get('user_tbl');
+		return	$query->result();
+	}
+
+	public function get_time($rid)
+	{
+		$this->db->where('user_id',$rid);
+		$this->db->where('time_out',NULL);
+		//$this->db->where('DATE(date)',date('Y-m-d'));
+		$query = $this->db->get('timesheets_tbl');
+		return $query->row_array();
+	}
+
+	public function send_msg()
+	{
+		$data = array(
+			'username' => $this->input->post('uname'),
+			'msg' => $this->input->post('msg')
+		);
+		$this->db->insert('chat',$data);
+
+		$results1 = $this->db->get('chat');
+		while ($extract = mysql_fetch_array($results1)) {
+			echo $extract['username'] . ": " . $extract['msg'] . "<br>";
+		}
+	}
+
 }
 
  ?>

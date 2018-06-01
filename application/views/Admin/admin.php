@@ -62,12 +62,22 @@
             <table id="user_data" class="table table-bordered table-striped" width="100%">  
              <thead>  
               <tr>  
-               <th width="10%">Task ID</th>  
+               <th width="10%">ID</th>  
                <th>Name</th>  
-               <th>Time In</th>  
-               <th>Time Out</th>
+               <th>Time In</th> 
               </tr>   
-             </thead>  
+              
+             </thead>
+             <tbody>
+               <?php foreach ($staffs as $staff): ?>
+                <tr>
+                  <td><?php echo $staff['id']; ?></td>
+                  <td><?php echo $staff['name']; ?></td>
+                  <td><?php echo date('h:ia ', strtotime($staff['timein'])); ?></td>
+                  
+                </tr>                  
+               <?php endforeach; ?>
+             </tbody> 
             </table>
           </div>
         </div>
