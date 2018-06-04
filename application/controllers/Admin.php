@@ -221,8 +221,17 @@ class Admin extends CI_Controller {
 
     public function chat()
     {
+        $data['users'] = $this->user_model->getalluser();
         $this->load->view('templates/dashboard_header');
-        $this->load->view('admin/chat');
+        $this->load->view('admin/chat',$data);
         $this->load->view('templates/dashboard_footer');
+    }
+
+    public function staffchat()
+    {
+        $data['users'] = $this->user_model->getalluser();
+        $this->load->view('templates/staff_header');
+        $this->load->view('admin/chat',$data);
+        $this->load->view('templates/staff_footer');
     }
 }

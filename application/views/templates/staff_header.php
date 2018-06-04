@@ -57,7 +57,7 @@
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://gastroenterologie-rabat.ma/wp-content/uploads/2017/06/icon-user.png" class="img-circle" alt="Avatar"> <span>Admin</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://gastroenterologie-rabat.ma/wp-content/uploads/2017/06/icon-user.png" class="img-circle" alt="Avatar"> <span><?php echo $this->session->userdata('userdata')['fname']; ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
@@ -80,6 +80,7 @@
 					<ul class="nav">
 						<li><a href="#" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/mytask" class=""><i class="lnr lnr-code"></i> <span>My Tasks</span></a></li>
+						<li><a href="<?php echo base_url(); ?>admin/staffchat" class=""><i class="lnr lnr-code"></i> <span>Chat</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/time" class=""><i class="lnr lnr-chart-bars"></i> <span>Time In/Out</span></a></li>
 						<li><a href="#" class=""><i class="lnr lnr-cog"></i> <span>Messaging</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/applyleave" class=""><i class="lnr lnr-alarm"></i> <span>Apply Leave</span></a></li>

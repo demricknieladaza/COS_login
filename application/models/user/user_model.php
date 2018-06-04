@@ -88,6 +88,11 @@ class User_model extends CI_Model{
 		$result = $this->db->get('task_tbl');
 		return $result->result();
 	}
+	public function getalluser()
+	{
+		$result = $this->db->get('user_tbl');
+		return $result->result();
+	}
 
 	public function markdone($uid)
 	{
