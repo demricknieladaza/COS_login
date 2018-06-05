@@ -15,7 +15,7 @@ function submitChat() {
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById('chatlogs').innerHTML = xmlhttp.responseText;
-			form.reset();
+			$('input[name=msg]').val('');
 		}
 	}
 	
@@ -37,7 +37,7 @@ function submitChats() {
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById('chatlogs').innerHTML = xmlhttp.responseText;
-			form.reset();
+			$('input[name=msg]').val('');
 		}
 	}
 	
@@ -47,20 +47,21 @@ function submitChats() {
 }
 
 $(document).ready(function(e){
-	var fname = $(this).attr("id");
-	var x = document.getElementById("chatlogs");
-	var x1 = document.getElementById("chatlogsa");
+	var fname = $('#fname').val();
+	var id = $('#userid').val();
+	var x = document.getElementById("chatlogsa");
+	var x1 = document.getElementById("chatlogs");
 	var y = document.getElementById("btn-chata");
 	var y1 = document.getElementById("btn-chatmy");
 	document.getElementById("userid").value = fname;
 	$.ajaxSetup({
 		cache: false
 	});
-	if(x1.style.display == "block" && y1.style.display == "block" ){
-		setInterval( function(){ $('#chatlogsa').load("http://localhost/php-chat/logs.php?key=getmy&fname="+fname+"&user_id=<?php echo $this->session->userdata('userdata')['id']; ?>"); }, 2000 );
+	if(x1.style.display == "block" && y.style.display == "block" ){
+		setInterval( function(){ $('#chatlogs').load("http://localhost/php-chat/logs.php?key=getall&uname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 );
 	}
 	else{
-		setInterval( function(){ $('#chatlogs').load("http://localhost/php-chat/logs.php?key=getall&uname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 );
+		setInterval( function(){ $('#chatlogsa').load("http://localhost/php-chat/logs.php?key=getmy&fname="+fname+"&user_id="+id+"&my_id=<?php echo $this->session->userdata('userdata')['id']; ?>&my_fname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 );
 	}
 	
 });
@@ -72,21 +73,23 @@ $(document).ready(function(e){
     </div>
 </div>
 <div class="panel-body" style="height: 550px;">
-        <div id="chatlogs">
-        LOADING CHATLOG...
+        <div id="chatlogs" style="display:block;">
+        LOADING CHATLOGs...
         </div>
         <div id="chatlogsa" style="display:none;">
-        LOADING CHATLOG...
+        LOADING CHATLOGsa...
         </div>
 </div>
 <form id="form1" name="form1"> 
 	<input type="hidden" name="uname" value="<?php echo $this->session->userdata('userdata')['fname']; ?>" /> <br />
 	<input type="hidden" name="userid" id="userid" value="" /> <br />
+	<input type="hidden" name="fname" id="fname" value="" /> <br />
+	<input type="hidden" name="my_id" id="my_id" value="<?php echo $this->session->userdata('userdata')['id']; ?>" /> <br />
 <div class="panel-footer">
     <div class="input-group">
         <input id="btn-input" name="msg" type="text" class="form-control input-sm" placeholder="Type your message here..." />
         <span class="input-group-btn">
-            <a type="submit" class="btn btn-warning btn-sm" id="btn-chata" onclick="submitChat()" >Send</a>
+            <a type="submit" class="btn btn-warning btn-sm" id="btn-chata" style="display:block;"onclick="submitChat()" >Send</a>
             <a type="submit" class="btn btn-warning btn-sm" id="btn-chatmy" style="display:none;" onclick="submitChats()" >Sends</a>
         </span>
     </div>
