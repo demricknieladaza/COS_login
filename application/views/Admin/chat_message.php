@@ -1,8 +1,11 @@
 <?php 
  ?>
 <script>
-
+var interval = null;
 function submitChat() {
+	$("#chats").animate({
+	  scrollTop: $('#chats')[0].scrollHeight - $('#chats')[0].clientHeight
+	}, 1000);
 	if(form1.uname.value == '' || form1.msg.value == '') {
 		alert("ALL FIELDS ARE MANDATORY!!!");
 		return;
@@ -24,6 +27,9 @@ function submitChat() {
 
 }
 function submitChats() {
+	$("#chats").animate({
+	  scrollTop: $('#chats')[0].scrollHeight - $('#chats')[0].clientHeight
+	}, 1000);
 	if(form1.uname.value == '' || form1.msg.value == '') {
 		alert("ALL FIELDS ARE MANDATORY!!!");
 		return;
@@ -46,7 +52,11 @@ function submitChats() {
 
 }
 
+
 $(document).ready(function(e){
+	$("#chats").animate({
+	  scrollTop: $('#chats')[0].scrollHeight - $('#chats')[0].clientHeight
+	}, 1000);
 	var fname = $('#fname').val();
 	var id = $('#userid').val();
 	var x = document.getElementById("chatlogsa");
@@ -58,21 +68,21 @@ $(document).ready(function(e){
 		cache: false
 	});
 	if(x1.style.display == "block" && y.style.display == "block" ){
-		setInterval( function(){ $('#chatlogs').load("http://localhost/php-chat/logs.php?key=getall&uname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 );
+		interval = setInterval( function(){ $('#chatlogs').load("http://localhost/php-chat/logs.php?key=getall&uname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 );
 	}
 	else{
-		setInterval( function(){ $('#chatlogsa').load("http://localhost/php-chat/logs.php?key=getmy&fname="+fname+"&user_id="+id+"&my_id=<?php echo $this->session->userdata('userdata')['id']; ?>&my_fname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 );
+		interval = setInterval( function(){ $('#chatlogsa').load("http://localhost/php-chat/logs.php?key=getmy&fname="+fname+"&user_id="+id+"&my_id=<?php echo $this->session->userdata('userdata')['id']; ?>&my_fname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 );
 	}
 	
 });
 
 </script>
 <div class="panel-heading">
-    <span class="glyphicon glyphicon-comment"></span> Group Chat
+    <h3 id="name"><span class="glyphicon glyphicon-comment"></span> Group Chat</h3>
     <div class="btn-group pull-right">
     </div>
 </div>
-<div class="panel-body" style="height: 550px;">
+<div id="chats" class="panel-body" style="height: 550px;">
         <div id="chatlogs" style="display:block;">
         LOADING CHATLOGs...
         </div>

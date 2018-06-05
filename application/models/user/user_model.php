@@ -35,6 +35,27 @@ class User_model extends CI_Model{
 		return $this->db->insert('user_tbl',$data);
 	}
 
+	public function changepass()
+	{
+		$this->db->where('id',$this->session->userdata('userdata')['id']);
+		$this->db->where('password',md5($this->input->post('opassword')));
+		$result = $this->db->get('user_tbl');
+		$data = $result->result_array();
+		if($result->num_rows()==1){
+			return $data;
+		}else{
+			return false;
+		}
+	}
+
+	public function changethepass()
+	{
+		$this->db->where('id',$this->session->userdata('userdata')['id']);
+		$this->db->set('password',md5($this->input->post('npassword')));
+		return $this->db->update('user_tbl');
+
+	}
+
 	public function timein()
 	{
 		$this->db->where('id',$this->input->post('uid'));
@@ -48,6 +69,18 @@ class User_model extends CI_Model{
 		$this->db->insert('timesheets_tbl',$data);
 		return $this->db->insert_id();
 	}
+
+	public function time_id()
+	{	
+		$this->db->select('id');
+		$this->db->where('user_id',$this->input->post('uid'));
+		$this->db->order_by('id','desc');
+
+		$query = $this->db->get('timesheets_tbl');
+		$ret = $query->row();
+		return $ret->id;
+	}
+
 	public function timeout()
 	{
 		$this->db->where('id',$this->input->post('uid'));
@@ -57,7 +90,7 @@ class User_model extends CI_Model{
 			'user_id'=>$this->input->post('uid'),
 			'note'=>$this->input->post('note')
 		);
-		$this->db->where('id',$this->input->post('tid'));
+		$this->db->where('id',$this->time_id());
 		$this->db->set('time_out', 'NOW()', FALSE);
 		return $this->db->update('timesheets_tbl');
 	}

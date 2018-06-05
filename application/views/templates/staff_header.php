@@ -59,9 +59,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://gastroenterologie-rabat.ma/wp-content/uploads/2017/06/icon-user.png" class="img-circle" alt="Avatar"> <span><?php echo $this->session->userdata('userdata')['fname']; ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="<?php echo base_url(); ?>admin/changepass"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
 								<li><a href="<?php echo base_url(); ?>admin/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
@@ -78,22 +76,11 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="#" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<!-- <li><a href="#" ><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li> -->
 						<li><a href="<?php echo base_url(); ?>staff/mytask" class=""><i class="lnr lnr-code"></i> <span>My Tasks</span></a></li>
-						<li><a href="<?php echo base_url(); ?>admin/staffchat" class=""><i class="lnr lnr-code"></i> <span>Chat</span></a></li>
+						<li><a href="<?php echo base_url(); ?>admin/staffchat" class=""><i class="lnr lnr-bubble"></i> <span>Chat</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/time" class=""><i class="lnr lnr-chart-bars"></i> <span>Time In/Out</span></a></li>
-						<li><a href="#" class=""><i class="lnr lnr-cog"></i> <span>Messaging</span></a></li>
 						<li><a href="<?php echo base_url(); ?>staff/applyleave" class=""><i class="lnr lnr-alarm"></i> <span>Apply Leave</span></a></li>
-						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
-								<ul class="nav">
-									<li><a href="page-profile.html" class="">Profile</a></li>
-									<li><a href="page-login.html" class="">Login</a></li>
-									<li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
-								</ul>
-							</div>
-						</li>
 					</ul>
 				</nav>
 			</div>

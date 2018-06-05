@@ -37,6 +37,20 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/staff_footer');
 	}
 
+    public function changepass()
+    {
+        $this->load->view('templates/staff_header');
+        $this->load->view('admin/change_pass');
+        $this->load->view('templates/staff_footer');
+    }
+
+    public function adchangepass()
+    {
+        $this->load->view('templates/dashboard_header');
+        $this->load->view('admin/change_pass');
+        $this->load->view('templates/dashboard_footer');
+    }
+
 	public function manage_staff()
 	{
 		$this->load->view('templates/dashboard_header');
@@ -64,7 +78,7 @@ class Admin extends CI_Controller {
 				elseif($data['userinfo'][0]['utype']==2){
 					$userdata = $data['userinfo'][0];
 					$this->session->set_userdata('userdata', $userdata);
-					redirect('staff');
+					redirect('staff/time');
 				}
 			}
 			else{
@@ -127,6 +141,19 @@ class Admin extends CI_Controller {
     		"data"	=> $data
     	);
     	echo json_encode($output);	
+    }
+
+    public function changemypass()
+    {
+        $data = $this->user_model->changepass();
+        if($data == True){
+            $this->user_model->changethepass();
+            $this->session->set_flashdata('success','Success');
+        }
+        else{
+            $this->session->set_flashdata('error','Wrong Password');
+        }
+        redirect('admin/changepass');
     }
 
     public function fetch_task()

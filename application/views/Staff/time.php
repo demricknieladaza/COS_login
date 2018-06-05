@@ -24,6 +24,14 @@ function checkTime(i) {
   <div class="main-content">
     <div class="container-fluid">
       <div class="panel panel-headline">
+        <div class="panel-heading">
+          <?php if($this->session->flashdata('success')){ ?>
+            <p class="alert alert-success alert-dismissible fade in" id="success-alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <?php echo $this->session->flashdata('success');} ?>
+            </p>
+            <h1>Time In/Out</h1>
+        </div>
         <div class="row">
           <div style="padding: 10px 10px;margin: 10px 10px;">
           <?php if($user['is_timein']=='no'): ?>
@@ -32,8 +40,8 @@ function checkTime(i) {
           <div id="txt"></div>
           <div class="form-group">
             Note:
-            <input type="text" class="form-control" style="width: 40%;"></input>
-            <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>"></input>
+            <input type="text" class="form-control" style="width: 40%;">
+            <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>">
           </div>
           <button type="submit" class="btn btn-success">Log In</button>
           <?php elseif($user['is_timein']=='yes'): ?>
@@ -42,18 +50,16 @@ function checkTime(i) {
           <div id="txt"></div>
           <div class="form-group">
             Note:
-            <input type="text" class="form-control" style="width: 40%;"></input>
-            <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>"></input>
-            <input type="hidden" class="form-control" name="tid" value="<?php echo $time_id ?>"></input>
+            <input type="text" class="form-control" style="width: 40%;">
+            <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>">
+            <input type="hidden" class="form-control" name="tid" value="<?php echo $time_id ?>">
           </div>
           <button type="submit" class="btn btn-success">Log Out</button>
           <?php endif; ?>
           <?php echo form_close(); ?>
         </div>
       </div>
-    </div>
-        <div class="panel panel-headline">
-        <div class="row">
+      <div class="row">
           <div style="padding: 10px 10px;margin: 10px 10px;">
             <table class="table">
               <thead class="thead-light">
@@ -75,7 +81,7 @@ function checkTime(i) {
             </table>
           </div>
         </div>
-      </div>
+    </div>
       </div>
     </div>
   </div>

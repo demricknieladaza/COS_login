@@ -19,7 +19,7 @@ class Staff extends CI_Controller {
 		$data['is_timein'] = "yes";
 		$this->session->set_userdata('userdata', $data); 
 		$this->session->set_flashdata('success','Successful!');
-		redirect('staff');
+		redirect('staff/time');
 	}
 	public function timeout()
 	{
@@ -29,7 +29,7 @@ class Staff extends CI_Controller {
 		$data['is_timein'] = "no";
 		$this->session->set_userdata('userdata', $data); 
 		$this->session->set_flashdata('success','Successful!');
-		redirect('staff');
+		redirect('staff/time');
 	}
 
 	public function mytask()
