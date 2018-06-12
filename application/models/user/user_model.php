@@ -92,6 +92,7 @@ class User_model extends CI_Model{
 		);
 		$this->db->where('id',$this->time_id());
 		$this->db->set('time_out', 'NOW()', FALSE);
+		$this->db->set('note', $this->input->post('note'));
 		return $this->db->update('timesheets_tbl');
 	}
 
@@ -183,11 +184,26 @@ class User_model extends CI_Model{
 			'msg' => $this->input->post('msg')
 		);
 		$this->db->insert('chat',$data);
-
 		$results1 = $this->db->get('chat');
 		while ($extract = mysql_fetch_array($results1)) {
 			echo $extract['username'] . ": " . $extract['msg'] . "<br>";
 		}
+	}
+
+	public function getstaff($sid)
+	{
+		$this->db->where('id',$sid);
+		$query = $this->db->get('user_tbl');
+		return $query->row_array();
+	}
+
+	public function get_staff_time($sid,$datefrom,$dateto)
+	{
+		$this->db->where('user_id',$sid);
+		where('date >=', $datefrom);
+		where('date <=', $dateto);
+		$result = $this->db->get('timesheets_tbl');
+		return $result->result();
 	}
 
 }

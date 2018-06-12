@@ -77,10 +77,10 @@
 				<nav>
 					<ul class="nav">
 						<!-- <li><a href="#" ><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li> -->
-						<li><a href="<?php echo base_url(); ?>staff/mytask" class=""><i class="lnr lnr-code"></i> <span>My Tasks</span></a></li>
+						<li><a href="<?php echo base_url(); ?>staff/mytask" class=""><i class="lnr lnr-list"></i> <span>My Tasks</span></a></li>
 						<li><a href="<?php echo base_url(); ?>admin/staffchat" class=""><i class="lnr lnr-bubble"></i> <span>Chat</span></a></li>
-						<li><a href="<?php echo base_url(); ?>staff/time" class=""><i class="lnr lnr-chart-bars"></i> <span>Time In/Out</span></a></li>
-						<li><a href="<?php echo base_url(); ?>staff/applyleave" class=""><i class="lnr lnr-alarm"></i> <span>Apply Leave</span></a></li>
+						<li><a href="<?php echo base_url(); ?>staff/time" class=""><i class="lnr lnr-chart-clock"></i> <span>Time In/Out</span></a></li>
+						<li><a href="<?php echo base_url(); ?>staff/applyleave" class=""><i class="lnr lnr-file-add"></i> <span>Apply Leave</span></a></li>
 					</ul>
 				</nav>
 			</div>

@@ -3,18 +3,24 @@
 </div>
 <ul class="list-group">
 	<div class="user">
-		<li class="groupchat list-group-item">Group Chat</li>
+		<li onclick="seen()" class="groupchat list-group-item">Group Chat</li>
 		<?php foreach ($users as $user): ?>
 			<?php if($user->id == $this->session->userdata('userdata')['id']): ?>
 			<?php else: ?>
-				<li class="userchat list-group-item" id="<?php echo $user->fname; ?>" value="<?php echo $user->id ?>" ><?php echo $user->fname; ?></li>
+				<li  class="userchat list-group-item" id="<?php echo $user->fname; ?>" value="<?php echo $user->id ?>"  ><?php echo $user->fname; ?><span class="badge">5</span></li>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
 </ul>
 
 <script>
+function seen() {
 
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open('GET','http://localhost/php-chat/insert.php?key=seen&fname='+fname+'&my_id=<?php echo $this->session->userdata('userdata')['id']; ?>',true);
+	xmlhttp.send();
+
+}
 
 $(document).on('click', '.userchat', function(){
 	$("#name").html("<span class='glyphicon glyphicon-comment'></span> "+$(this).attr("id"));
@@ -40,6 +46,7 @@ $(document).on('click', '.userchat', function(){
        	cache: false
        });
        interval = setInterval( function(){ $('#chatlogsa').load("http://localhost/php-chat/logs.php?key=getmy&fname="+fname+"&user_id="+id+"&my_id=<?php echo $this->session->userdata('userdata')['id']; ?>&my_fname=<?php echo $this->session->userdata('userdata')['fname']; ?>"); }, 2000 ); 
+       seen();
   });
 
 	$(document).on('click', '.groupchat', function(){

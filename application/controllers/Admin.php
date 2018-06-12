@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 	public function login()
 	{
 		$this->load->view('templates/login_header');
-		$this->load->view('login/login');
+		$this->load->view('Login/login');
 	}
 
 	public function dashboard()
@@ -123,12 +123,12 @@ class Admin extends CI_Controller {
     		$sub_array = array();
     		$sub_array[] = $row->id;
     		$sub_array[] = $row->fname;
-    		$sub_array[] = $row->lname;
-    		if($row->fname=='admin'){
+            $sub_array[] = $row->lname;
+    		if($row->utype=='admin'){
     			$sub_array[] = 'ADMIN';
     		}
     		else{
-    			$sub_array[] = '<button type="button" id="'.$row->id.'" class="btn btn-warning btn-xs assign">Assign Task</button>';
+    			$sub_array[] = '<button type="button" id="'.$row->id.'" class="btn btn-warning btn-xs assign">Assign Task</button> <a href="'.base_url().'admin/calctime/'.$row->id.'"><button type="button" id="'.$row->id.'" class="btn btn-success btn-xs calc">Calculate Time</button>';
     		}
     		
     		$data[] = $sub_array;
@@ -260,5 +260,27 @@ class Admin extends CI_Controller {
         $this->load->view('templates/staff_header');
         $this->load->view('admin/chat',$data);
         $this->load->view('templates/staff_footer');
+    }
+
+    public function calctime($uid)
+    {
+        $data['staff'] = $this->user_model->getstaff($uid);
+        $this->load->view('templates/dashboard_header');
+        $this->load->view('admin/timecalc',$data);
+        $this->load->view('templates/dashboard_footer');
+    }
+
+    public function calcstafftime()
+    {
+        $output = array();    
+        $data = $this->user_model->get_staff_time($_POST["id"],$_POST["datefrom"],$_POST["dateto"]);  
+        foreach ($data as $row) 
+        {
+            $sub_array = array();
+            $sub_array[] = $row;
+
+            $output[] = $sub_array;
+        } 
+        echo json_encode($output);
     }
 }

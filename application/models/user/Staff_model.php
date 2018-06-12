@@ -2,7 +2,7 @@
  class Staff_model extends CI_Model  
  {  
   var $table = "user_tbl";  
-  var $select_column = array("id","fname","lname");
+  var $select_column = array("*");
   var $order_column = array("id","fname","lname",NULL);
   function make_query()  
   {  

@@ -16,13 +16,13 @@
         <div class="panel-body">
           <div class="table-responsive">  
           <br />  
-          <table id="user_data" class="table table-bordered table-striped">  
+          <table id="user_data" class="table table-bordered table-striped" style="width:100%;">  
            <thead>  
             <tr>  
              <th>ID</th>  
              <th>First Name</th>  
              <th>Last Name</th>
-             <th>Task</th>
+             <th>Action</th>
             </tr>   
            </thead>  
           </table>  
