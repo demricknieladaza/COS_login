@@ -39,8 +39,6 @@ function checkTime(i) {
           Time:
           <div id="txt"></div>
           <div class="form-group">
-            Note:
-            <input type="text" class="form-control" style="width: 40%;">
             <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>">
           </div>
           <button type="submit" class="btn btn-success">Log In</button>
@@ -50,7 +48,7 @@ function checkTime(i) {
           <div id="txt"></div>
           <div class="form-group">
             Note:
-            <input type="text" class="form-control" style="width: 40%;">
+            <input type="text" name="note" class="form-control" style="width: 40%;">
             <input type="hidden" class="form-control" name="uid" value="<?php echo $user['id']?>">
             <input type="hidden" class="form-control" name="tid" value="<?php echo $time_id ?>">
           </div>

@@ -49,6 +49,7 @@
                <th>Date</th>  
                <th>Time In</th>  
                <th>Time Out</th>
+               <th>Note</th>
                <th>Total Hours</th>
               </tr>   
              </thead>
@@ -92,6 +93,7 @@
                              $('<td>').text(v.date),
                              $('<td>').text(v.time_in),
                              $('<td>').text(v.time_out),
+                             $('<td>').text(v.note),
                              $('<td>').text(v.total)
                          ).appendTo('#user_data');
                 // console.log($tr.wrap('<p>').html());

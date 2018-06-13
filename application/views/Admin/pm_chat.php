@@ -7,17 +7,17 @@
 		<?php foreach ($users as $user): ?>
 			<?php if($user->id == $this->session->userdata('userdata')['id']): ?>
 			<?php else: ?>
-				<li  class="userchat list-group-item" id="<?php echo $user->fname; ?>" value="<?php echo $user->id ?>"  ><?php echo $user->fname; ?><span class="badge">5</span></li>
+				<li  onclick='$.playSound("http://www.noiseaddicts.com/samples_1w72b820/3724.mp3")' class="userchat list-group-item" id="<?php echo $user->fname; ?>" value="<?php echo $user->id ?>"  ><?php echo $user->fname; ?><span class="badge badge-danger">!</span></li>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
 </ul>
-
+<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 <script>
 function seen() {
 
 	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open('GET','http://localhost/php-chat/insert.php?key=seen&fname='+fname+'&my_id=<?php echo $this->session->userdata('userdata')['id']; ?>',true);
+	xmlhttp.open('GET','http://localhost/php-chat/insert.php?key=seen&fname='+fname.value+'&my_id=<?php echo $this->session->userdata('userdata')['id']; ?>',true);
 	xmlhttp.send();
 
 }
