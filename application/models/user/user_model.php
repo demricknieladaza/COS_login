@@ -200,8 +200,8 @@ class User_model extends CI_Model{
 	public function get_staff_time($sid,$datefrom,$dateto)
 	{
 		$this->db->where('user_id',$sid);
-		where('date >=', $datefrom);
-		where('date <=', $dateto);
+		$this->db->where('date >=', $datefrom);
+		$this->db->where('date <=', $dateto);
 		$result = $this->db->get('timesheets_tbl');
 		return $result->result();
 	}

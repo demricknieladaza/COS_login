@@ -276,6 +276,28 @@ class Admin extends CI_Controller {
         $data = $this->user_model->get_staff_time($_POST["id"],$_POST["datefrom"],$_POST["dateto"]);  
         foreach ($data as $row) 
         {
+            $stime = new DateTime($row->time_in);
+            $etime = new DateTime($row->time_out);
+            if($stime > $etime){
+                $interval1 = $stime->diff(new DateTime('24:00:00')) ;
+                $interval2 = $etime->diff(new DateTime('00:00:00')) ;
+
+                $e = new DateTime('00:00');
+                $f = clone $e;
+                $e->add($interval1);
+                $f->add($interval2);
+                $row->total = $f->diff($e)->format("%H.%I");
+            }
+            else{
+                $diff = $stime->diff($etime);
+                // $row->total = $diff->format( '%H:%I' )+date('h:ia ', strtotime($row->time_out));
+                $row->total = $diff->format( '%H.%I' );
+            }
+            $row->date = date("M-d-Y", strtotime($row->date));
+            $row->time_in = date('h:ia ', strtotime($row->time_in));
+            $row->time_out = date('h:ia ', strtotime($row->time_out));
+            // $tot = array("total"=>"haha");
+            // array_push($row,$tot);
             $sub_array = array();
             $sub_array[] = $row;
 

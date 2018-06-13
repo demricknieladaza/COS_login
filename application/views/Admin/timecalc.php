@@ -22,7 +22,7 @@
                             </div>
                          <div class="col-md-6 col-sm-6 col-xs-12">
                             <!-- open form -->
-                            <input class="form-control" id="id" name="datefrom" value="<?php echo $staff['id']; ?>" type="hidden" />
+                            <input class="form-control" id="id" value="<?php echo $staff['id']; ?>" type="hidden" />
                             <div class="form-group"> <!-- Date input -->
                               <label class="control-label">FROM</label>
                               <input class="form-control" id="date" name="datefrom" placeholder="MM/DD/YYY" type="text" required />
@@ -46,12 +46,15 @@
             <table id="user_data" class="table table-bordered table-striped" style="width:100%;">  
              <thead>  
               <tr>  
-               <th>ID</th>  
-               <th>First Name</th>  
-               <th>Last Name</th>
-               <th>Action</th>
+               <th>Date</th>  
+               <th>Time In</th>  
+               <th>Time Out</th>
+               <th>Total Hours</th>
               </tr>   
-             </thead>  
+             </thead>
+             <tbody id="tbodyid">
+               
+             </tbody> 
             </table>
           </div>
         </div>
@@ -59,13 +62,14 @@
     </div>
   </div>
 </div>
+<script type="text/javascript" src="http://www.datejs.com/build/date.js"></script>
 <script type="text/javascript">
   $(document).on('click', '.calc', function(){  
        // var user_id = $(this).attr("id");  
-       var datefrom = $("input[name=datefrom]").val();
-       var dateto = $("input[name=datefrom]").val();
+       var datefrom = $("input[name=datefrom]").val()+ ' 00:00:00';
+       var dateto = $("input[name=dateto]").val()+ ' 99:99:99';
        var id = $("#id").val();
-       
+       // alert(dateto);
        $.ajax({  
             url:"<?php echo base_url().'admin/calcstafftime'; ?>",  
             method:"POST",  
@@ -78,13 +82,22 @@
              // $('#uid').val(data.id);   
              // $('.umodal-title').text("Assign Task");  
              // $('#id').val(user_id);
-             // $.each(data, function() {
-             //   $.each(this, function(k, v) {
-             //     /// do stuff
-             //     console.log(k,v);
-             //   });
-             // });
-             console.log(data);
+             $("#tbodyid").empty();
+             $.each(data, function() {
+               $.each(this, function(k, v) {
+                 /// do stuff
+                 var d = v.date;
+                 var dout = Date.parse(d);
+                 var $tr = $('<tr>').append(
+                             $('<td>').text(v.date),
+                             $('<td>').text(v.time_in),
+                             $('<td>').text(v.time_out),
+                             $('<td>').text(v.total)
+                         ).appendTo('#user_data');
+                // console.log($tr.wrap('<p>').html());
+               });
+             });
+             // console.log(data);
             }  
        }) 
   });
