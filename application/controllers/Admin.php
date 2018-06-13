@@ -3,8 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
+    public function __construct() {
+        parent::__construct();
+        
+    }
+
+    public function checkudata() {
+        if(!$this->session->userdata())
+        {
+            redirect('admin');
+        }
+    }
+
 	public function login()
 	{
+        // $this->checkudata();
 		$this->load->view('templates/login_header');
 		$this->load->view('Login/login');
 	}
