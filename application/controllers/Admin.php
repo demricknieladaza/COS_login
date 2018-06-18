@@ -6,8 +6,19 @@ class Admin extends CI_Controller {
 
 	public function login()
 	{
-		$this->load->view('templates/login_header');
-		$this->load->view('Login/login');
+        if (!$this->session->userdata('userdata')){
+            $this->load->view('templates/login_header');
+            $this->load->view('Login/login');
+        }
+        else{
+            if($this->session->userdata('userdata')['utype'] == 1){
+                redirect('dashboard');
+            }
+            else{
+                redirect('staff/time');
+            }
+        }
+		
 	}
 
 	public function dashboard()
@@ -304,6 +315,17 @@ class Admin extends CI_Controller {
 
             $output[] = $sub_array;
         } 
+        echo json_encode($output);
+    }
+
+    public function notifier()
+    {
+        $data = $this->user_model->notify();
+        $output = array();  
+        foreach ($data as $row) 
+        {
+            $output[] = $row;
+        }
         echo json_encode($output);
     }
 }

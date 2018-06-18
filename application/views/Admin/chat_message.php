@@ -51,7 +51,26 @@ function submitChats() {
 	xmlhttp.send();
 
 }
-
+setInterval(notify, 5000);
+function notify() {
+	$.ajax({  
+       url:"<?php echo base_url().'admin/notifier'; ?>",  
+       method:"POST",    
+       dataType:"json", 
+       success:function(data)  
+       {  
+       		// console.log(data[0]);
+         $.each(data, function() {
+           $.each(this, function(k, v) {
+             console.log(v);
+             $.playSound("http://creativeoutsourcesolutions.com/notification/noti1.ogg");
+             document.getElementById(v).style.color = "red" ;
+             document.getElementById(v).style.border = "1px solid red" ;
+           });
+         });
+       }
+  });
+}
 
 $(document).ready(function(e){
 	$("#chats").animate({

@@ -206,6 +206,15 @@ class User_model extends CI_Model{
 		return $result->result();
 	}
 
+	public function notify()
+	{
+		$this->db->select('username');
+		$this->db->where('user_id',$this->session->userdata('userdata')['id']);
+		$this->db->where('seen',NULL);
+		$result = $this->db->get('chat');
+		return $result->result();
+	}
+
 }
 
  ?>

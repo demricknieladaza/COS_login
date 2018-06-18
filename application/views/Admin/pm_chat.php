@@ -7,7 +7,7 @@
 		<?php foreach ($users as $user): ?>
 			<?php if($user->id == $this->session->userdata('userdata')['id']): ?>
 			<?php else: ?>
-				<li  onclick='$.playSound("http://www.noiseaddicts.com/samples_1w72b820/3724.mp3")' class="userchat list-group-item" id="<?php echo $user->fname; ?>" value="<?php echo $user->id ?>"  ><?php echo $user->fname; ?><span class="badge badge-danger">!</span></li>
+				<li class="userchat list-group-item" id="<?php echo $user->fname; ?>" value="<?php echo $user->id ?>"  ><?php echo $user->fname; ?></li>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
@@ -42,6 +42,8 @@ $(document).on('click', '.userchat', function(){
        $("#userid").val($(this).attr("value"));
        var fname = $('#fname').val();
 	   var id = $('#userid').val();
+	   document.getElementById(fname).style.color = "" ;
+       document.getElementById(fname).style.border = "none" ;
        $.ajaxSetup({
        	cache: false
        });

@@ -71,8 +71,12 @@ function checkTime(i) {
                 <?php foreach($timesheets as $time): ?>
               <tr>
                 <td scope="row"><?php echo date("M-d-Y", strtotime($time->date)); ?></td>
-                <td scope="row"><?php echo $time->time_in; ?></td>
-                <td scope="row"><?php echo $time->time_out; ?></td>
+                <td scope="row"><?php echo date('h:ia ', strtotime($time->time_in)); ?></td>
+                <?php if ($time->time_out == NULL): ?>
+                  <td scope="row"></td>
+                <?php else: ?>
+                  <td scope="row"><?php echo date('h:ia ', strtotime($time->time_out)); ?></td>
+                <?php endif; ?>
               </tr>
               <?php endforeach; ?>
               </tbody>
