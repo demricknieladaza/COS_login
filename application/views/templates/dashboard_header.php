@@ -87,7 +87,7 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="<?php echo base_url(); ?>admin/dashboard" ><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="<?php echo base_url(); ?>admin/chat" class=""><i class="lnr lnr-bubble"></i> <span>Chat</span></a></li>
+						<li><a href="<?php echo base_url(); ?>admin/chat" class="" target="_blank"><i class="lnr lnr-bubble"></i> <span>Chat</span></a></li>
 						<!-- <li><a href="<?php echo base_url(); ?>admin/calctime" class=""><i class="lnr lnr-calendar-full"></i> <span>Calculate Time</span></a></li> -->
 					</ul>
 				</nav>

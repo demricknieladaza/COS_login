@@ -2,6 +2,13 @@
  ?>
 <script>
 var interval = null;
+var isOldTitle = true;
+var oldTitle = "Dashboard";
+var newTitle = "NewMessage";
+var interval = null;
+function changeTitle() {
+    document.title = newTitle;
+}
 function submitChat() {
 	$("#chats").animate({
 	  scrollTop: $('#chats')[0].scrollHeight - $('#chats')[0].clientHeight
@@ -53,6 +60,7 @@ function submitChats() {
 }
 setInterval(notify, 5000);
 function notify() {
+	var x = document.getElementById("fname").value;
 	$.ajax({  
        url:"<?php echo base_url().'admin/notifier'; ?>",  
        method:"POST",    
@@ -63,9 +71,16 @@ function notify() {
          $.each(data, function() {
            $.each(this, function(k, v) {
              console.log(v);
-             $.playSound("http://creativeoutsourcesolutions.com/notification/noti1.ogg");
-             document.getElementById(v).style.color = "red" ;
-             document.getElementById(v).style.border = "1px solid red" ;
+             if( v == x){
+             	document.getElementById(v).style.color = "red" ;
+	            document.getElementById(v).style.border = "1px solid red" ;
+             }
+             else{
+             	$.playSound("http://creativeoutsourcesolutions.com/notification/noti1.ogg");
+	            document.getElementById(v).style.color = "red" ;
+	            document.getElementById(v).style.border = "1px solid red" ;
+	            changeTitle();
+             }
            });
          });
        }

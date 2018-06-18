@@ -29,7 +29,7 @@ class Admin extends CI_Controller {
             $time = $this->user_model->get_time($row->id);
             $staffs_sub = array();
             $staffs_sub['id'] =$row->id;
-            $staffs_sub['name'] =$row->fname." ".$row->fname;
+            $staffs_sub['name'] =$row->fname." ".$row->lname;
             $staffs_sub['timein'] = $time['time_in'];
             $staffs_sub['timeout'] = $time['time_out'];
 

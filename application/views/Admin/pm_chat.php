@@ -44,6 +44,7 @@ $(document).on('click', '.userchat', function(){
 	   var id = $('#userid').val();
 	   document.getElementById(fname).style.color = "" ;
        document.getElementById(fname).style.border = "none" ;
+       document.title = "Dashboard";
        $.ajaxSetup({
        	cache: false
        });
